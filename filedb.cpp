@@ -42,16 +42,17 @@ FileDB::FileDB(const std::string& pathToFile) : m_path(pathToFile)
 
 bool FileDB::addPerson(const Person& person) {
     //Add new to set
-    m_persons.emplace(person);
+    const auto& res = m_persons.emplace(person);
 
     //Write into file
-    std::ofstream file(m_path, std::ios_base::app);
-    if (file.is_open()) {
-        file << person;
-        return true;
-    } else {
-        return false;
+    if (res.second) {
+        std::ofstream file(m_path, std::ios_base::app);
+        if (file.is_open()) {
+            file << person;
+            return true;
+        }
     }
+    return false;
 }
 
 bool FileDB::delPerson(const Person& person) {
