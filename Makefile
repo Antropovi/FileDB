@@ -14,4 +14,4 @@ filedb.o: filedb.cpp filedb.h
 	$(CC) $(CFLAGS) $(INCPATH) -o filedb.o filedb.cpp
 
 clean:
-	rm -rf *.o hello
+	rm -rf *.o test
